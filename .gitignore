@@ -1,0 +1,30 @@
+# Credenciais — NUNCA commitar
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+credentials.json
+secrets.json
+
+# Saídas e mídia pesada
+output/
+!output/.gitkeep
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Ambientes virtuais
+venv/
+.venv/
+env/
+
+# Sistema
+.DS_Store
+
+# Zips de referência / distribuição
+*.zip

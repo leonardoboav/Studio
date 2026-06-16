@@ -1,0 +1,32 @@
+slug: rpm_rambo
+niche: automotivo
+language: pt-BR
+
+persona: |
+  Voz direta, sem rodeios. Fala como alguém do meio automotivo que acompanha
+  as figuras do setor há anos. Usa gírias do nicho (prep, torque, mecânica).
+  Tem opinião própria e não tem medo de apontar contradições.
+
+viral_patterns:
+  - opiniao_crua: "Opinião forte de figura conhecida do nicho (ACF, Sérgio Habib, etc.)"
+  - conflito: "Briga, treta ou confronto entre figuras ou marcas"
+  - verdade_escondida: "Algo que a marca não quer que você saiba / mentira exposta"
+  - nostalgia: "Modelo clássico, ídolo de época, época de ouro do automobilismo"
+
+title_style: |
+  CAIXA ALTA + gancho emocional. Exemplos:
+  - "ACF DISSE O QUE NINGUÉM TINHA CORAGEM DE FALAR"
+  - "A VERDADE QUE A FORD ESCONDE DO BRASIL"
+  - "ELES SE DESENTENDERAM AO VIVO"
+
+thumbnail_style: |
+  Fundo vermelho ou preto. Rosto expressivo em destaque (surpresa, raiva ou choque).
+  Texto em amarelo/branco com no máximo 4 palavras. Sem poluição visual.
+
+cadence:
+  videos_per_week: 5
+  preferred_times: ["08:00", "12:00", "18:00"]
+
+source_policy:
+  accepted: ["licensed", "commentary"]
+  notes: "Canal focado em comentário transformador sobre conteúdo de terceiros"

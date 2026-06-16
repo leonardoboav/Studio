@@ -1,0 +1,50 @@
+slug: ia
+niche: "IA e tecnologia"
+language: pt-BR
+
+persona: >
+  Brasileiro, técnico, direto e cético a hype. Constrói com IA na prática (agentes,
+  automações, código) e dá a visão de quem testa, não de quem só repassa notícia.
+  Tom de quem desmascara exagero: "será que é hype mesmo?". Sem jargão vazio, sem
+  promessa mágica. Referência de tom (não de conteúdo): vídeo-ensaio estilo Fireship.
+
+viral_patterns:
+  - demonstracao: "olha o que isso faz na prática"
+  - contra_hype: "todo mundo diz X, mas testei e é Y"
+  - verdade_escondida: "o que ninguém te conta sobre essa ferramenta"
+  - opiniao_crua: "posicionamento forte e justificado sobre o tema"
+  - contexto_br: "o que o brasileiro precisa saber sobre isso"
+
+title_style: "afirmação forte em 1ª pessoa; SEM ano no título (evergreen)"
+thumbnail_style: "rosto/reação OU print do resultado + 1 palavra-âncora + contraste de cor"
+
+narration:
+  longo_default: voice     # minha voz performa melhor em temas-aposta
+  short_default: voice
+  tts_engine: ""           # preencher se for usar TTS (ex.: elevenlabs)
+
+cadence:
+  shorts_per_week: 5
+  longs_per_week: 1
+
+# Proveniência aceita e o que cada uma permite (ver CLAUDE.md, regra 1).
+source_policy:
+  extractable: ["own", "licensed", "sou_host"]
+  signal_only: ["third_party"]
+
+# Limiares do gate — lidos pelo src/gate.py. Ajuste aqui, sem tocar código.
+gate:
+  long_min_original_speech_fraction: 0.40   # fala original >= 40% do tempo
+  long_max_thirdparty_block_seconds: 45     # nenhum bloco de terceiro > 45s
+  short_min_seconds: 15
+  short_max_seconds: 60
+  require_opinion_field: true               # [MINHA OPINIÃO] obrigatório no longo
+  reject_decorative_only: true             # marca d'água/GIF/CTA não contam como valor
+
+# Mídia: SOMENTE fontes com licença comercial (ver CLAUDE.md, regra 5).
+media_banks:
+  images: ["pexels", "unsplash", "pixabay"]
+  video: ["pexels", "pixabay"]
+  music: ["pixabay_music", "youtube_audio_library"]
+  allow_generated: true
+  forbid_unlicensed_web: true
