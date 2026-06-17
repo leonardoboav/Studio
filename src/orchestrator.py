@@ -13,6 +13,16 @@ a única fonte da verdade:
   - gate.validate_short barra short signal_only sem roteiro próprio (Bloco 3).
 Duplicar essas checagens aqui criaria duas fontes da verdade que divergem com o tempo.
 Então plan_week confia nelas: só conta, ordena e — se faltar — reporta e PARA.
+
+TRAVA 4 (não afrouxar): plan_week NÃO tem entrada que aceite signal_only virar short.
+A cota de shorts só é preenchida por material extractable (fatiar longo próprio, takes
+avulsos) e por roteiros 'script' que EU gravo — nunca por corte de terceiro. Isto não é
+sobre formato: é o mecanismo que desmonetizou o RPM Rambo (fala de terceiro como espinha
++ edição decorativa). Os Shorts do RPM Rambo não foram flagrados, mas isso NÃO prova que
+corte de terceiro em short é seguro — só que os longos eram o ofensor maior e caíram
+primeiro (ver CONTEXT.md → Refinamento factual). "Deixar shorts usarem corte de podcast
+porque é só um short" reintroduz exatamente a causa da desmonetização. Por isso o déficit
+reporta e PARA, em vez de completar a cota com signal_only.
 """
 import argparse
 import json
@@ -77,6 +87,8 @@ def plan_week(channel_slug: str, inputs: dict) -> dict:
         shorts_planned += 1
 
     # ── Déficit: só reporta e para. NUNCA completa com signal_only. ──────────
+    # (Mecanismo, não formato: corte de terceiro em short é o mesmo reused content que
+    #  derrubou os longos do RPM Rambo. Ver docstring do módulo + CONTEXT.md.)
     deficit = {}
     short_gap = max(0, shorts_needed - shorts_planned)
     long_gap = max(0, longs_needed - longs_planned)

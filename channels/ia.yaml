@@ -28,6 +28,11 @@ cadence:
   longs_per_week: 1
 
 # Proveniência aceita e o que cada uma permite (ver CLAUDE.md, regra 1).
+# POR QUÊ: o RPM Rambo caiu pelo MECANISMO (fala de terceiro como espinha + edição só
+# decorativa), não pela duração. Os longos foram flagrados; os Shorts não — mas isso NÃO
+# torna corte de terceiro em short seguro (ver CONTEXT.md → Refinamento factual). Por isso
+# third_party é sempre signal_only: vira pesquisa para roteiro original, nunca espinha de
+# peça — short ou longo. Não mover third_party para extractable.
 source_policy:
   extractable: ["own", "licensed", "sou_host"]
   signal_only: ["third_party"]

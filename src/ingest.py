@@ -19,7 +19,14 @@ _FORMAT_OPTIONS = [
 
 
 def nature_of(provenance: str) -> str:
-    """Derive content nature from provenance. Locks what the pipeline can do."""
+    """
+    Derive content nature from provenance. Locks what the pipeline can do.
+
+    third_party -> signal_only (vira pesquisa para roteiro original, nunca conteúdo
+    no vídeo). Isto NÃO é sobre formato (short vs longo): é sobre o mecanismo que
+    derrubou o RPM Rambo — fala de terceiro como espinha da peça. Ver CONTEXT.md →
+    Refinamento factual.
+    """
     return "extractable" if provenance in EXTRACTABLE else "signal_only"
 
 
@@ -41,6 +48,12 @@ def ingest(url: str, provenance: str, channel_slug: str) -> dict:
         raise ValueError(
             f"Invalid provenance '{provenance}'. Must be: own, licensed, sou_host, third_party."
         )
+    # TRAVA 1 (não afrouxar): third_party nunca entra por aqui. ingest() produz um
+    # file_path publicável; deixar third_party passar significaria usar fala de terceiro
+    # como espinha de uma peça — exatamente o mecanismo (não o formato) que desmonetizou
+    # o RPM Rambo. Vale para short E longo: a duração não blinda (ver CONTEXT.md →
+    # Refinamento factual). third_party só via ingest_reference() = signal_only = pesquisa
+    # para roteiro original. Reabrir este caminho reintroduz a causa da desmonetização.
     if provenance == "third_party":
         raise ValueError(
             "Use ingest_reference() for third_party sources. "

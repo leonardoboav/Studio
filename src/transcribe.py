@@ -8,12 +8,22 @@ TRANSCRIPTS_DIR = Path(__file__).parent.parent / "output" / "raw"
 _MODEL: WhisperModel | None = None
 
 
-def transcribe(ingest_result: dict, model_size: str = "large-v3") -> dict:
+def transcribe(ingest_result: dict, model_size: str = "large-v3",
+               language: str | None = None) -> dict:
     """
     Transcribe with word-level timestamps using the dedicated whisper audio file
     (mono 16kHz WAV), not the master video — so publishing quality is never degraded.
+
+    language: força um idioma (ex.: 'pt') ou None para auto-detectar. Default deriva
+    de nature: own/licensed (extractable) = 'pt' (conteúdo do criador é PT-BR);
+    signal_only = None (referência de terceiro pode ser gringa — auto-detecta). A
+    transcrição de referência é só pesquisa interna, nunca vai pro vídeo (regra 1).
     """
     video_id = ingest_result["metadata"]["id"]
+
+    if language is None:
+        nature = ingest_result.get("nature", "extractable")
+        language = None if nature == "signal_only" else "pt"
 
     TRANSCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -28,7 +38,7 @@ def transcribe(ingest_result: dict, model_size: str = "large-v3") -> dict:
     segments_raw, info = model.transcribe(
         str(audio_path),
         word_timestamps=True,
-        language="pt",
+        language=language,
         vad_filter=True,
     )
 

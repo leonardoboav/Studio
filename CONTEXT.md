@@ -32,6 +32,26 @@ significativo, modificação substancial ou valor de entretenimento/educação. 
 adicional do reuso cru também inclui Content ID e strikes — por isso a fonte precisa
 ser própria, licenciada ou genuinamente transformada.
 
+### Refinamento factual (o que realmente caiu, e por quê)
+
+Registro factual para corrigir uma leitura comum e perigosa do histórico:
+
+- **Não foram os Shorts que caíram.** Tanto a desmonetização por reused content quanto
+  o strike de copyright vieram dos **vídeos longos**. Os Shorts do RPM Rambo **nunca
+  foram flagrados**.
+- **A causa não foi o formato "longo".** Foi o **mecanismo**: fala de terceiro como
+  **espinha** do vídeo (cortes de podcast/entrevista) + edição **apenas decorativa** por
+  cima. O formato é incidental; o mecanismo é a causa.
+- **Corolário inequívoco:** como a causa é o mecanismo e **não a duração**, o **mesmo
+  mecanismo aplicado a um short continua sendo reused content**. A duração **não blinda**.
+  O fato de os Shorts do RPM Rambo não terem caído **não prova** que corte de terceiro
+  em short é seguro — prova apenas que o **maior ofensor (os longos) existia e foi
+  flagrado primeiro**. Tirar o ofensor maior não torna o menor inofensivo.
+
+> Por isso "valor original" e "fala própria como espinha" são exigências de **mecanismo**,
+> válidas para short E longo. Nenhuma peça — independente da duração — pode ter fala de
+> terceiro como espinha com edição só decorativa por cima.
+
 ## O que funcionava (manter) e o que faltava (corrigir)
 
 **Funcionava:**

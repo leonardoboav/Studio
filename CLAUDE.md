@@ -6,11 +6,23 @@ ferramentas em `src/`, e me entrega um pacote para revisão em `output/ready/`.
 
 Canal atual: **IA e tecnologia** (perfil em `channels/ia.yaml`).
 
+> **Continuidade entre conversas:** ao iniciar uma conversa nova, rode `/resume-session`
+> para carregar o estado da última sessão (o que funcionou, o que NÃO funcionou, o próximo
+> passo) de `~/.claude/session-data/`. Ao encerrar, rode `/save-session` para gravar o
+> estado. Isso evita repetir erros já descobertos e perder decisões.
+
 ---
 
 ## REGRAS INEGOCIÁVEIS (a lição que custou 4 meses — leia `CONTEXT.md`)
 
 Estas regras nunca são relaxadas, por nenhum pedido, nem por pressa numa sessão.
+
+> **Fato que ancora todas as regras (ver `CONTEXT.md` → Refinamento factual):** o que
+> derrubou o RPM Rambo (desmonetização + strike) foram os **vídeos longos**, não os
+> Shorts — mas a causa **não foi a duração**, foi o **mecanismo**: fala de terceiro como
+> espinha + edição só decorativa. Logo o **mesmo mecanismo num short continua sendo
+> reused content**. A duração não blinda. Estas regras são sobre o mecanismo, não sobre
+> formato — valem igual para short e longo.
 
 1. **Proveniência trava o que pode ser extraído.**
    - `own` / `licensed` / `sou_host`: conteúdo **extractable** — pode cortar o trecho,
@@ -29,7 +41,10 @@ Estas regras nunca são relaxadas, por nenhum pedido, nem por pressa numa sessã
 
 4. **Nenhum short pode ser corte de fonte `signal_only`.** Se a cota não fechar com
    material `extractable` + roteiros `script`, **não invente** um corte de terceiro —
-   reporte o déficit.
+   reporte o déficit. (Esta regra não é sobre formato: é o mecanismo que mata. Um short
+   de corte de podcast é o MESMO reused content que derrubou os longos do RPM Rambo —
+   só que mais curto. Afrouxar isto "porque é só um short" reintroduz a causa exata da
+   desmonetização.)
 
 5. **Mídia (imagem/vídeo/música) só de fontes com licença comercial.** Bancos com API
    livre (Pexels, Unsplash, Pixabay; música royalty-free) ou geração própria. Nunca
