@@ -132,6 +132,84 @@ sistema calcula a partir dos rótulos.
 """
 
 
+# ── Modo cut (seleção de MOMENTOS 30–60s de criador BR) ─────────────────────────
+_SYSTEM_MOMENTS = """
+Você seleciona MOMENTOS de um vídeo de terceiro para virar shorts verticais (9:16).
+Um MOMENTO é um trecho de 30 a 60 segundos que se sustenta SOZINHO: tem um assunto
+único e sentido completo (começo-meio-fim de uma ideia), não corta no meio de uma
+frase nem depende de contexto que ficou de fora.
+
+Critérios de um bom momento:
+- assunto único e nítido (dá pra resumir em uma frase);
+- gancho logo no início (a primeira fala já prende);
+- fecha o raciocínio dentro da janela (não deixa pergunta sem resposta no trecho);
+- 30–60s. Se a ideia boa tem 22s, NÃO estique com enchimento — descarte.
+
+Use SOMENTE os timestamps que aparecem na transcrição. start_sec e end_sec devem cair
+em fronteiras de fala (começo/fim de segmentos), nunca no meio de uma palavra.
+
+Responda SOMENTE com JSON válido, sem markdown.
+""".strip()
+
+_USER_MOMENTS = """
+## Perfil do canal (tom/nicho — para escolher o que é relevante)
+{profile_json}
+
+## Transcrição com timestamps (vídeo de terceiro)
+{transcript_text}
+
+## Tarefa
+Selecione de 2 a 6 MOMENTOS. Para cada um:
+{{
+  "cuts": [
+    {{
+      "rank": 1,
+      "assunto": "frase do que o trecho realmente diz",
+      "assunto_slug": "kebab-case-curto-do-assunto",
+      "por_que_tem_sentido": "por que fecha sozinho: o gancho e o fechamento do raciocínio",
+      "start_sec": 0.0,
+      "end_sec": 0.0,
+      "score": 0.0,
+      "score_reason": "por que este trecho tem potencial"
+    }}
+  ]
+}}
+Lembre: 30–60s, fronteira de fala, assunto único. Qualidade > quantidade.
+"""
+
+
+def select_moments(transcribe_result: dict) -> dict:
+    """
+    Modo 'cut': lê a transcrição com timestamps e propõe MOMENTOS de 30–60s com assunto
+    fechado, para o fluxo de shorts a partir de criador BR (src/moments.py). Reaproveita
+    retry/parse da API. Cache por video_id+channel+modo cut.
+    """
+    channel_slug = transcribe_result["channel_slug"]
+    video_id = transcribe_result["metadata"]["id"]
+
+    CLIPS_DIR.mkdir(parents=True, exist_ok=True)
+    cache_path = CLIPS_DIR / f"{video_id}_{channel_slug}_moments.json"
+    if cache_path.exists():
+        cuts = json.loads(cache_path.read_text())
+        return {**transcribe_result, "cuts": cuts}
+
+    import anthropic
+
+    profile = _load_profile(channel_slug)
+    transcript_text = _flatten_transcript(transcribe_result.get("transcript", {"segments": []}))
+    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+
+    cuts = _call_with_retry(
+        client, _SYSTEM_MOMENTS,
+        _USER_MOMENTS.format(
+            profile_json=json.dumps(profile, ensure_ascii=False, indent=2),
+            transcript_text=transcript_text,
+        ),
+    )
+    cache_path.write_text(json.dumps(cuts, indent=2, ensure_ascii=False))
+    return {**transcribe_result, "cuts": cuts}
+
+
 def run_brain(transcribe_result: dict) -> dict:
     """
     Dispatch por nature. Cache key inclui channel_slug e modo.

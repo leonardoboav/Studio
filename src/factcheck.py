@@ -152,15 +152,25 @@ Regras:
 - Busque fontes reais. PRIORIZE fonte primária: site/blog oficial da entidade citada
   (ex.: anthropic.com), documento de governo, veículo de imprensa estabelecido.
   DESPRIORIZE fórum, agregador, outro vídeo de YouTube, rede social.
-- Classifique em status:
-  - "confirmado": uma fonte primária/estabelecida confirma a afirmação.
-  - "contradito": uma fonte crível diz o contrário.
+
+- Identifique o NÚCLEO da afirmação (o fato central que ela assere) e classifique:
+  - "confirmado": uma fonte crível confirma o NÚCLEO. Se a fonte confirma o núcleo
+    mas diverge num detalhe secundário, número aproximado ou enquadramento, AINDA é
+    "confirmado" — registre a divergência no campo "ressalva".
+  - "contradito": use SOMENTE quando uma fonte crível NEGA EXPLICITAMENTE o núcleo
+    (afirma o oposto do fato central). Divergência de nuance, detalhe, data aproximada
+    ou enquadramento NÃO é contradito.
   - "nao_encontrado": nenhuma fonte crível encontrada.
+
+- NA DÚVIDA entre "confirmado com ressalva" e "contradito", escolha CONFIRMADO com
+  ressalva. "contradito" reprova a peça inteira e bloqueia o pipeline — reserve-o para
+  falsidade real do núcleo, não para imprecisão de detalhe.
 - NUNCA marque "confirmado" sem uma url_fonte real e crível.
-- trecho_fonte: paráfrase MUITO curta (< 15 palavras). NÃO cole parágrafos da fonte.
+- trecho_fonte e ressalva: paráfrase MUITO curta (< 15 palavras cada). NÃO cole
+  parágrafos da fonte.
 
 Responda APENAS com JSON, sem markdown:
-{{"status":"confirmado|contradito|nao_encontrado","url_fonte":"","trecho_fonte":"","fonte_tipo":"primaria|secundaria|fraca"}}"""
+{{"status":"confirmado|contradito|nao_encontrado","url_fonte":"","trecho_fonte":"","ressalva":"","fonte_tipo":"primaria|secundaria|fraca"}}"""
 
 
 def _verify_claim(client, claim: str) -> dict:
@@ -194,9 +204,11 @@ def _verify_claim(client, claim: str) -> dict:
         status = "nao_encontrado"
 
     trecho = " ".join((data.get("trecho_fonte") or "").split()[:15])  # < 15 palavras
+    ressalva = " ".join((data.get("ressalva") or "").split()[:15])
     return {
         "claim": claim, "status": status, "url_fonte": url,
-        "trecho_fonte": trecho, "fonte_tipo": data.get("fonte_tipo", ""),
+        "trecho_fonte": trecho, "ressalva": ressalva,
+        "fonte_tipo": data.get("fonte_tipo", ""),
     }
 
 
@@ -302,6 +314,8 @@ def _print_report(fc: dict, gate: dict) -> None:
             print(f"        fonte ({c.get('fonte_tipo','')}): {c['url_fonte']}")
         if c["trecho_fonte"]:
             print(f"        trecho: \"{c['trecho_fonte']}\"")
+        if c.get("ressalva"):
+            print(f"        ressalva: {c['ressalva']}")
         if c.get("erro"):
             print(f"        nota: {c['erro']}")
     if fc["transcription_flags"]:

@@ -52,6 +52,30 @@ Registro factual para corrigir uma leitura comum e perigosa do histórico:
 > válidas para short E longo. Nenhuma peça — independente da duração — pode ter fala de
 > terceiro como espinha com edição só decorativa por cima.
 
+### Decisão do operador (2026-06-17) — shorts a partir de criadores brasileiros
+
+O operador decidiu, conscientemente, adotar uma **estratégia de shorts baseada em cortes
+de criadores brasileiros do nicho de IA** (ex.: podcasts/vídeos como o do Fábio Akita),
+em 9:16, 30–60s. Esta é uma decisão de negócio do dono do canal; o registro factual acima
+**permanece verdadeiro** (a causa do que derrubou o RPM Rambo foi o mecanismo, não o
+formato) e não foi alterado.
+
+O que muda no produto:
+- O agente passa a **suportar o fluxo de corte de vídeo brasileiro de terceiro para short**
+  (ler → extrair um assunto com contexto → editar para 30–60s → futuramente legendar).
+
+Risco assumido (declarado, não removido):
+- Corte de fala de terceiro como espinha + edição/legenda decorativa é o padrão que o
+  YouTube classifica como **reused content**, e foi o que desmonetizou o canal anterior.
+  Legenda **não** conta como transformação. O operador aceita esse risco.
+
+Mitigação exigida para reduzi-lo (continua valendo, pois é o que separa "clipe cru" de
+"peça transformada" aos olhos da política):
+- Cada short deve carregar **camada autoral**: comentário/ângulo/contexto próprio do
+  operador, não só o trecho recortado + legenda. Quanto mais a peça for "o operador usando
+  o trecho para dizer algo seu", menor o risco; quanto mais for "só o trecho legendado",
+  maior. Esta é a diferença, não a duração.
+
 ## O que funcionava (manter) e o que faltava (corrigir)
 
 **Funcionava:**

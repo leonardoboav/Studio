@@ -125,6 +125,52 @@ def ingest_reference(url: str, channel_slug: str) -> dict:
     return result
 
 
+def ingest_for_cut(url: str, channel_slug: str) -> dict:
+    """
+    Baixa um vídeo de terceiro como MASTER para o fluxo de CORTE em momentos (shorts
+    9:16 a partir de criador BR). Porta separada e explicitamente nomeada — NÃO afrouxa
+    a TRAVA 1 de ingest(): este caminho existe por DECISÃO DE OPERADOR (ver CONTEXT.md →
+    "Decisão do operador"), com o risco de reused content declarado.
+
+    Diferente de ingest_reference() (que é signal_only, só áudio p/ pesquisa), aqui
+    baixamos o vídeo real porque o produto deste fluxo é cortar o trecho. O resultado
+    carrega mode='cut' e a exigência de camada autoral fica registrada nos sidecars
+    dos momentos (src/moments.py), não aqui.
+
+    Returns dict compatível com transcribe(): file_path, whisper_path, metadata{...},
+    provenance='third_party', mode='cut'.
+    """
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+
+    info = _extract_info_url(url)
+    video_id = info.get("id", "unknown")
+    raw_path = _download(url, video_id)
+    master, whisper = _normalize(raw_path, video_id, delete_src=True)
+
+    result = {
+        "file_path": str(master),
+        "whisper_path": str(whisper),
+        "provenance": "third_party",
+        "nature": "extractable",  # mecanicamente cortável; o risco vive nos sidecars
+        "mode": "cut",
+        "channel_slug": channel_slug,
+        "metadata": {
+            "id": video_id,
+            "title": info.get("title", video_id),
+            "url": url,
+            "channel": info.get("uploader", ""),
+            "duration_sec": info.get("duration", 0),
+            "upload_date": info.get("upload_date", ""),
+            "description": (info.get("description") or "")[:500],
+            "thumbnail_url": info.get("thumbnail", ""),
+        },
+    }
+    (RAW_DIR / f"{video_id}_cut_source.json").write_text(
+        json.dumps(result, indent=2, ensure_ascii=False)
+    )
+    return result
+
+
 # ── internal helpers ──────────────────────────────────────────────────────────
 
 def _ingest_url(url: str, provenance: str, channel_slug: str) -> dict:
