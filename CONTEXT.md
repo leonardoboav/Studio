@@ -29,8 +29,7 @@ content" do YouTube avalia o canal como um todo.
 
 Cortes **não** são proibidos pelo YouTube. O que é exigido é comentário original
 significativo, modificação substancial ou valor de entretenimento/educação. O risco
-adicional do reuso cru também inclui Content ID e strikes — por isso a fonte precisa
-ser própria, licenciada ou genuinamente transformada.
+adicional do reuso cru também inclui Content ID e strikes — licenciada ou genuinamente transformada.
 
 ### Refinamento factual (o que realmente caiu, e por quê)
 
@@ -39,9 +38,9 @@ Registro factual para corrigir uma leitura comum e perigosa do histórico:
 - **Não foram os Shorts que caíram.** Tanto a desmonetização por reused content quanto
   o strike de copyright vieram dos **vídeos longos**. Os Shorts do RPM Rambo **nunca
   foram flagrados**.
-- **A causa não foi o formato "longo".** Foi o **mecanismo**: fala de terceiro como
+- **A causa não foi o formato "longo".** Foram os vídeos longos utilizando **mecanismo** dos shorts: fala de terceiro como
   **espinha** do vídeo (cortes de podcast/entrevista) + edição **apenas decorativa** por
-  cima. O formato é incidental; o mecanismo é a causa.
+  cima. Mas nas diretrizes e documentação do YouTube permite esse modelo de mecanismos nos shorts, não nos vídeos longos. Você deve saber diferenciar o modelo a ser escolhido
 - **Corolário inequívoco:** como a causa é o mecanismo e **não a duração**, o **mesmo
   mecanismo aplicado a um short continua sendo reused content**. A duração **não blinda**.
   O fato de os Shorts do RPM Rambo não terem caído **não prova** que corte de terceiro
@@ -51,30 +50,6 @@ Registro factual para corrigir uma leitura comum e perigosa do histórico:
 > Por isso "valor original" e "fala própria como espinha" são exigências de **mecanismo**,
 > válidas para short E longo. Nenhuma peça — independente da duração — pode ter fala de
 > terceiro como espinha com edição só decorativa por cima.
-
-### Decisão do operador (2026-06-17) — shorts a partir de criadores brasileiros
-
-O operador decidiu, conscientemente, adotar uma **estratégia de shorts baseada em cortes
-de criadores brasileiros do nicho de IA** (ex.: podcasts/vídeos como o do Fábio Akita),
-em 9:16, 30–60s. Esta é uma decisão de negócio do dono do canal; o registro factual acima
-**permanece verdadeiro** (a causa do que derrubou o RPM Rambo foi o mecanismo, não o
-formato) e não foi alterado.
-
-O que muda no produto:
-- O agente passa a **suportar o fluxo de corte de vídeo brasileiro de terceiro para short**
-  (ler → extrair um assunto com contexto → editar para 30–60s → futuramente legendar).
-
-Risco assumido (declarado, não removido):
-- Corte de fala de terceiro como espinha + edição/legenda decorativa é o padrão que o
-  YouTube classifica como **reused content**, e foi o que desmonetizou o canal anterior.
-  Legenda **não** conta como transformação. O operador aceita esse risco.
-
-Mitigação exigida para reduzi-lo (continua valendo, pois é o que separa "clipe cru" de
-"peça transformada" aos olhos da política):
-- Cada short deve carregar **camada autoral**: comentário/ângulo/contexto próprio do
-  operador, não só o trecho recortado + legenda. Quanto mais a peça for "o operador usando
-  o trecho para dizer algo seu", menor o risco; quanto mais for "só o trecho legendado",
-  maior. Esta é a diferença, não a duração.
 
 ## O que funcionava (manter) e o que faltava (corrigir)
 
